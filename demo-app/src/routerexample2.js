@@ -1,6 +1,10 @@
 import React from "react";
 import {
-  
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useParams
 } from "react-router-dom";
 
 export default function App() {
@@ -27,4 +31,35 @@ export default function App() {
         </div>
     </Router>
   );
+}
+
+function Home() {
+  return <h2>Home</h2>;
+}
+function About() {
+  return <h2>About</h2>;
+}
+function Topics() {
+  //let match = useMatch();
+return (
+  <div>
+    <h2>Topics</h2>
+    <p>Choose your favorite topic</p>
+    <ul>
+      <li>
+        <Link to={"/topics/cats"}>Cats</Link>
+      </li>
+      <li>
+        <Link to={"/topics/dogs"}>Dogs</Link>
+      </li>
+    </ul>
+    <Routes>
+      <Route path={"/topics/:topicID"} element={ <Topic />} />
+    </Routes>
+  </div>
+);
+}
+function Topic() {
+  let { topicID } = useParams();
+  return <h3>Requested topic ID: {topicID}</h3>;
 }
